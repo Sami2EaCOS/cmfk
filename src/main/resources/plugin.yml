@@ -1,0 +1,5 @@
+name: CMFK
+version: '${project.version}'
+main: me.smourad.cmfk.CMFK
+api-version: '1.20'
+load: STARTUP
