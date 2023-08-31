@@ -25,7 +25,7 @@ import java.util.Objects;
 public abstract class CMFKInventory implements Listener {
 
     protected final JavaPlugin plugin;
-    private final InventorySlotFactory inventorySlotFactory;
+    protected final InventorySlotFactory inventorySlotFactory;
 
     protected final int height;
     @Getter
