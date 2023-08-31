@@ -5,11 +5,11 @@ import com.google.inject.Singleton;
 import me.smourad.cmfk.factory.InventoryFactory;
 import me.smourad.cmfk.game.TheDirector;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -48,8 +48,15 @@ public class TheGatherer implements Listener {
             teams.putIfAbsent(teamType, new HashSet<>());
             teams.get(teamType).add(uuid);
 
+            setupPlayer(player, teamType);
             player.sendMessage(Component.text("Vous avez été ajouté dans l'Équipe %s".formatted(teamType.getName())));
         }
+    }
+
+    protected void setupPlayer(Player player, TeamType teamType) {
+        TextComponent name = Component.text(player.getName()).color(TextColor.color(teamType.getHexColor()));
+        player.displayName(name);
+        player.playerListName(name);
     }
 
     protected void clearPlayer(UUID uuid) {
@@ -61,7 +68,6 @@ public class TheGatherer implements Listener {
                 .map(Bukkit::getPlayer)
                 .toList();
     }
-
 
 
 }
