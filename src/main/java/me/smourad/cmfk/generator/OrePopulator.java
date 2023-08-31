@@ -56,7 +56,7 @@ public class OrePopulator extends BlockPopulator implements Listener {
 
             if (random.nextInt(100) < rarity) {
                 int x = cx + random.nextInt(16);
-                int y = random.nextInt(height + 64) - 64;
+                int y = random.nextInt(height + 1 + 64) - 64;
                 int z = cz + random.nextInt(16);
 
                 generateOreVein(selected, x, y, z, random, region);
@@ -84,7 +84,7 @@ public class OrePopulator extends BlockPopulator implements Listener {
                 switch (random.nextInt(6)) {
                     case 0 -> --x;
                     case 1 -> ++x;
-                    case 2 -> --y;
+                    case 2 -> y = Math.max(-64, y - 1);
                     case 3 -> ++y;
                     case 4 -> --z;
                     case 5 -> ++z;
