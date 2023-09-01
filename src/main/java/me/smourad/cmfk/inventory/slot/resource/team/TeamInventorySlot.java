@@ -2,10 +2,10 @@ package me.smourad.cmfk.inventory.slot.resource.team;
 
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
+import me.smourad.cmfk.game.team.TeamType;
+import me.smourad.cmfk.game.team.TheGatherer;
 import me.smourad.cmfk.inventory.CMFKInventory;
 import me.smourad.cmfk.inventory.slot.resource.ActionSlot;
-import me.smourad.cmfk.team.TeamType;
-import me.smourad.cmfk.team.TheGatherer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

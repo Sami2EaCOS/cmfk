@@ -3,7 +3,7 @@ package me.smourad.cmfk.command.resource;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import me.smourad.cmfk.command.CMFKCommand;
-import me.smourad.cmfk.team.TheGatherer;
+import me.smourad.cmfk.game.team.TheGatherer;
 import org.bukkit.entity.Player;
 
 @Singleton

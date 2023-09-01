@@ -1,4 +1,4 @@
-package me.smourad.cmfk.team;
+package me.smourad.cmfk.game.team;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -10,7 +10,6 @@ import me.smourad.cmfk.utils.ItemBuilder;
 import me.smourad.cmfk.utils.ItemType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -51,14 +50,13 @@ public class TheGatherer implements Listener {
 
     @EventHandler
     public void fillInventoryOnJoin(PlayerJoinEvent event) {
-        GameState state = director.getState();
         Player player = event.getPlayer();
 
         if (isInTeam(player)) {
             player.getInventory().clear();
         }
 
-        if (Objects.equals(state, GameState.WAITING)) {
+        if (director.isNotStarted()) {
             PlayerInventory inventory = player.getInventory();
             inventory.clear();
             inventory.setHeldItemSlot(0);
@@ -107,13 +105,13 @@ public class TheGatherer implements Listener {
     }
 
     public void openTeamSelector(Player player) {
-        if (Objects.equals(director.getState(), GameState.WAITING)) {
+        if (director.isNotStarted()) {
             inventoryFactory.createTeamInventory(player).open();
         }
     }
 
     public void selectTeam(Player player, TeamType teamType) {
-        if (Objects.equals(director.getState(), GameState.WAITING)) {
+        if (director.isNotStarted()) {
             UUID uuid = player.getUniqueId();
 
             clearPlayer(uuid);
@@ -126,7 +124,7 @@ public class TheGatherer implements Listener {
     }
 
     protected void setupPlayer(Player player, TeamType teamType) {
-        TextComponent name = Component.text(player.getName()).color(TextColor.color(teamType.getHexColor()));
+        TextComponent name = Component.text(player.getName(), teamType.getColor());
         player.displayName(name);
         player.playerListName(name);
     }
@@ -143,7 +141,7 @@ public class TheGatherer implements Listener {
 
 
     public void openAdminMenu(Player player) {
-        if (Objects.equals(director.getState(), GameState.WAITING)) {
+        if (director.isNotStarted()) {
             inventoryFactory.createGathererAdminMenu(player).open();
         }
     }

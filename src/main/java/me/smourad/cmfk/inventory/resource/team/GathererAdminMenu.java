@@ -37,7 +37,7 @@ public class GathererAdminMenu extends CMFKCarvedMenu {
 
         setSlot(10, inventorySlotFactory.createCustomSlot(this, Material.DIAMOND, "Lancer la partie",
                 () -> {
-                    director.launch();
+                    director.start();
                     close();
                 }
         ));
