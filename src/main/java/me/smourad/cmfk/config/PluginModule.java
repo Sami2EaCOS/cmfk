@@ -1,5 +1,7 @@
 package me.smourad.cmfk.config;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -7,6 +9,7 @@ import com.google.inject.Singleton;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import me.smourad.cmfk.factory.InventoryFactory;
 import me.smourad.cmfk.factory.InventorySlotFactory;
+import me.smourad.cmfk.factory.ItemBuilderFactory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 
@@ -35,6 +38,7 @@ public final class PluginModule extends AbstractModule {
 
     private void configureUtils(Reflections reflections) {
         bind(Reflections.class).toInstance(reflections);
+        bind(Gson.class).toInstance(new GsonBuilder().create());
     }
 
     private void configureEagerListeners(Reflections reflections) {
@@ -52,6 +56,7 @@ public final class PluginModule extends AbstractModule {
     private void configureFactories() {
         install(new FactoryModuleBuilder().build(InventoryFactory.class));
         install(new FactoryModuleBuilder().build(InventorySlotFactory.class));
+        install(new FactoryModuleBuilder().build(ItemBuilderFactory.class));
     }
 
     public Injector createInjector() {
